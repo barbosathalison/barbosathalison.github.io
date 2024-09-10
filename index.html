@@ -54,6 +54,22 @@
       background-color: #45a049;
     }
   </style>
+    <!-- Formatar numero de celular -->
+    <script>
+        function formatarTelefone(event) {
+            const input = event.target;
+            let valor = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+
+            if (valor.length > 2) {
+                valor = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+            }
+            if (valor.length > 11) {
+                valor = `${valor.slice(0, 10)}-${valor.slice(10, 14)}`;
+            }
+
+            input.value = valor;
+        }
+    </script>
 </head>
 <body>
 	<!-- Google Tag Manager (noscript) -->
@@ -68,11 +84,15 @@
     <label for="email">E-mail:</label>
     <input type="email" id="email" name="email" required>
 
+    <label for="phone">Telefone:</label>
+    <input type="tel" id="phone" name="phone" oninput="formatarTelefone(event)" placeholder="(99) 99999-9999" required>
+
     <label for="idade">Idade:</label>
-    <input type="number" id="idade" name="idade" required>
+    <input type="text" id="idade" name="idade" required>
 
     <label for="genero">Gênero:</label>
     <select id="genero" name="genero" required>
+        <option>---</option>
       <option value="masculino">Masculino</option>
       <option value="feminino">Feminino</option>
       <option value="outro">Outro</option>
